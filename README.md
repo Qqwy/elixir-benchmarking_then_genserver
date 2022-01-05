@@ -1,21 +1,7 @@
 # BenchmarkingThenGenserver
 
-**TODO: Add description**
+## How to run
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `benchmarking_then_genserver` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:benchmarking_then_genserver, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/benchmarking_then_genserver](https://hexdocs.pm/benchmarking_then_genserver).
-
+1. Edit the `elixir` file (locate it using `which elixir`), by commenting the line `ERTS_BIN=`.
+This allows us to override the location of the Erlang Runtime System by setting this environment variable ourselves.
+2. Compile Erlang with both JIT and EMU support. This is automated by the `compile_erlang` make-command (`make compile_erlang`.)

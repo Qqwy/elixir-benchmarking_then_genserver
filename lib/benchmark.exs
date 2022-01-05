@@ -16,14 +16,15 @@ defmodule Benchmark do
   # We run the benchmark on all elements in a list
   # as we're simulating something which will often be run in a tight loop
   def run() do
+    IO.puts("Using emu_flavor: #{:erlang.system_info(:emu_flavor)}")
     Benchee.run(
       %{
         "Manual" => fn input -> code_under_test(ManualServer, input) end,
         "Then" => fn input -> code_under_test(ThenServer, input) end,
         "ThenInlined" => fn input -> code_under_test(ThenInlinedServer, input) end
       },
-      time: 10,
-      memory_time: 2,
+      time: 2,
+      # memory_time: 2,
       inputs: %{
         "1" => 1..1,
         "10" => 1..10,
