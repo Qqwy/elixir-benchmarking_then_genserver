@@ -7,10 +7,11 @@ defmodule Benchmark do
         unquote(module).add(pid, num)
       end
 
-      unquote(module).current_state(pid)
+      result = unquote(module).current_state(pid)
+      GenServer.stop(pid)
+      result
     end
   end
-
 
   # We run the benchmark on all elements in a list
   # as we're simulating something which will often be run in a tight loop
@@ -19,18 +20,21 @@ defmodule Benchmark do
       %{
         "Manual" => fn input -> code_under_test(ManualServer, input) end,
         "Then" => fn input -> code_under_test(ThenServer, input) end,
-        "ThenInlined" => fn input -> code_under_test(ThenInlinedServer, input) end,
-
+        "ThenInlined" => fn input -> code_under_test(ThenInlinedServer, input) end
       },
       time: 10,
-      memory_time: 5,
+      memory_time: 2,
       inputs: %{
+        "1" => 1..1,
+        "10" => 1..10,
         "100" => 1..100,
-        # "1000" => 1..1000,
+        "1000" => 1..1000,
+        "10000" => 1..10000,
+        "100000" => 1..100_000,
+        "1000000" => 1..1_000_000
       }
     )
   end
-
 end
 
 Benchmark.run()
