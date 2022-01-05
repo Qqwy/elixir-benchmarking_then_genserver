@@ -24,7 +24,7 @@ defmodule Benchmark do
         "ThenInlined" => fn input -> code_under_test(ThenInlinedServer, input) end
       },
       time: 2,
-      # memory_time: 2,
+      memory_time: 2,
       inputs: %{
         "1" => 1..1,
         "10" => 1..10,
