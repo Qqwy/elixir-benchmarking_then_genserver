@@ -31,7 +31,16 @@ impls = %{
 
         {:noreply, state}
       end
+  end,
+  SuperManualServer =>
+    quote do
+    @impl true
+    def handle_cast({:add, num}, %{result: result, n_operations: n_operations}) do
+      new_state = %{result: result + num, n_operations: n_operations + 1}
+      {:noreply, new_state}
     end
+  end
+
 }
 
 for {module_name, snippet} <- impls do

@@ -19,6 +19,7 @@ defmodule Benchmark do
     IO.puts("Using emu_flavor: #{:erlang.system_info(:emu_flavor)}")
     Benchee.run(
       %{
+        "Manual" => fn input -> code_under_test(SuperManualServer, input) end,
         "Manual" => fn input -> code_under_test(ManualServer, input) end,
         "Then" => fn input -> code_under_test(ThenServer, input) end,
         "ThenInlined" => fn input -> code_under_test(ThenInlinedServer, input) end
